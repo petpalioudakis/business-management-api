@@ -1,0 +1,18 @@
+[
+  {
+    "first_name": "Staff 1 n",
+    "last_name": "Staff 1 l",
+    "email": "test1@test.gr",
+    "job_position": "pr",
+    "phone_number": "123456789",
+    "business": 1
+  },
+  {
+    "first_name": "Staff 2 n",
+    "last_name": "Staff 2 l",
+    "email": "test2@test.gr",
+    "job_position": "kitchen",
+    "phone_number": "123456789",
+    "business": 2
+  }
+]

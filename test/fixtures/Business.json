@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Business 1",
+    "location": "Location 1",
+    "business_type": "cafe"
+  },
+  {
+    "name": "Business 2",
+    "location": "Location 2",
+    "business_type": "restaurant"
+  },
+  {
+    "name": "Business 3",
+    "location": "Location 3",
+    "business_type": "bar"
+  }
+]

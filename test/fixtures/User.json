@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1,
+    "username": "my_test_user",
+    "password": "password",
+    "email": "my_mail@test.gr",
+    "first_name": "my_first_name",
+    "last_name": "my_last_name"
+  }
+]

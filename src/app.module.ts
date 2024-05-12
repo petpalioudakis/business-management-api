@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import * as process from 'node:process';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BusinessModule } from './business/business.module';
@@ -13,6 +14,7 @@ import ormConfigProd from './config/orm.config.prod';
       isGlobal: true,
       load: [ormConfig],
       expandVariables: true,
+      envFilePath: `.env.${process.env.NODE_ENV}.local`,
     }),
     TypeOrmModule.forRootAsync({
       useFactory:

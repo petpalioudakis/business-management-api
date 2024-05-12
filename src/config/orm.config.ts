@@ -13,5 +13,6 @@ export default registerAs(
     autoLoadEntities: true,
     entities: [__dirname + '/../**/*.entity{.ts,.js}'],
     synchronize: true,
+    dropSchema: Boolean(parseInt(process.env.DB_DROP_SCHEMA)),
   }),
 );
