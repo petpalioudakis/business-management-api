@@ -11,7 +11,7 @@ export class CreateStaffDto {
   @Length(3, 50)
   first_name: string;
 
-  @Length(10, 50)
+  @Length(3, 50)
   last_name: string;
 
   @IsEmail()
@@ -20,7 +20,10 @@ export class CreateStaffDto {
   @IsEnum(JobPositionType)
   job_position: JobPositionType;
 
-  @IsPhoneNumber('GB', { message: 'Invalid phone number provided' })
   @IsOptional()
+  @IsPhoneNumber('GB', {
+    message: 'Invalid phone number provided',
+    always: false,
+  })
   phone_number: string;
 }

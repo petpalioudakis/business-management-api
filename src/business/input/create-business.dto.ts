@@ -6,10 +6,7 @@ export class CreateBusinessDto {
   @Length(3, 50)
   readonly name: string;
 
-  @IsUrl(
-    { require_protocol: true, require_host: true },
-    { message: 'Invalid URL provided' },
-  )
+  @IsString()
   @Length(3, 50)
   location: string;
 
