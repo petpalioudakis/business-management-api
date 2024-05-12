@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
 import { Business } from './business.entity';
@@ -24,7 +24,11 @@ export class BusinessService {
    * @param id
    */
   async findOne(id: number): Promise<Business> {
-    return await this.businessRepository.findOneBy({ id });
+    const business = await this.businessRepository.findOneBy({ id });
+    if (!business) {
+      throw new NotFoundException('Business not found');
+    }
+    return business;
   }
 
   /**

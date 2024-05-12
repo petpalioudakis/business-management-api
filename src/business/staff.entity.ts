@@ -7,7 +7,12 @@ import {
 } from 'typeorm';
 import { Business } from './business.entity';
 import { JobPositionType } from './input/jobPositionType';
-
+/**
+ * The Staff entity represents a business staff member in the application.
+ * It is a TypeORM entity that maps directly to the 'staff' table in the database.
+ *
+ * @class Staff
+ */
 @Entity('staff')
 export class Staff {
   constructor(partial: Partial<Staff>) {
