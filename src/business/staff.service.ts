@@ -51,7 +51,10 @@ export class StaffService {
    * @returns {Promise<Staff>} A promise that resolves to a Staff entity.
    */
   async findOne(id: number): Promise<Staff> {
-    return await this.staffRepository.findOneBy({ id });
+    return await this.staffRepository.findOne({
+      where: { id },
+      relations: ['business'],
+    });
   }
 
   /**

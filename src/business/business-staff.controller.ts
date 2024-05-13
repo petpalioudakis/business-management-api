@@ -25,7 +25,7 @@ import { StaffService } from './staff.service';
  *
  * @class BusinessStaffController
  */
-@Controller('business/:businessId/staff')
+@Controller('')
 @UseGuards(AuthGuardJwt)
 export class BusinessStaffController {
   /**
@@ -47,6 +47,10 @@ export class BusinessStaffController {
     private readonly businessService: BusinessService,
   ) {}
 
+  @Get('/staff')
+  async findAll(): Promise<Staff[]> {
+    return await this.staffService.findAll();
+  }
   /**
    * Handles the GET /business/:businessId/staff request.
    * Returns all staff of a business.
@@ -54,7 +58,7 @@ export class BusinessStaffController {
    * @param {number} businessId - The ID of the business.
    * @returns {Promise<Staff[]>} The staff of the business.
    */
-  @Get()
+  @Get('/business/:businessId/staff')
   async findAllByBusiness(
     @Param('businessId', ParseIntPipe) businessId: number,
   ): Promise<Staff[]> {
@@ -66,10 +70,6 @@ export class BusinessStaffController {
     return await this.staffService.findAllByBusiness(businessId);
   }
 
-  @Get('/staff')
-  async findAll(): Promise<Staff[]> {
-    return await this.staffService.findAll();
-  }
   /**
    * Handles the GET /business/:businessId/staff/:id request.
    * Returns a staff member by ID.
@@ -77,7 +77,7 @@ export class BusinessStaffController {
    * @param {number} id - The ID of the staff member.
    * @returns {Promise<Staff>} The staff member.
    */
-  @Get(':id')
+  @Get('business/:businessId/staff/:id')
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<Staff> {
     const staff = await this.staffService.findOne(id);
     if (!staff) {
@@ -95,7 +95,7 @@ export class BusinessStaffController {
    * @param {CreateStaffDto} input - The data to create the staff member.
    * @returns {Promise<Staff>} The created staff member.
    */
-  @Post()
+  @Post('business/:businessId/staff')
   async create(
     @Param('businessId', ParseIntPipe) businessId: number,
     @Body() input: CreateStaffDto,
@@ -116,7 +116,7 @@ export class BusinessStaffController {
    * @param {UpdateStaffDto} input - The data to update the staff member.
    * @returns {Promise<Staff>} The updated staff member.
    */
-  @Patch(':id')
+  @Patch('business/:businessId/staff/:id')
   async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() input: UpdateStaffDto,
@@ -136,7 +136,7 @@ export class BusinessStaffController {
    * @param {number} id - The ID of the staff member.
    * @returns {Promise<void>}
    */
-  @Delete(':id')
+  @Delete('business/:businessId/staff/:id')
   @HttpCode(204)
   async remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
     const staff = await this.staffService.findOne(id);
