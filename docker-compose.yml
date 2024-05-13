@@ -1,6 +1,8 @@
 services:
 
   postgres:
+    env_file:
+      - .env.dev.local
     image: postgres:13.1
     restart: always
     environment:
@@ -9,6 +11,8 @@ services:
       - '${DB_PORT:-5432}:5432'
 
   adminer:
+    env_file:
+      - .env.dev.local
     image: adminer
     restart: always
     ports:

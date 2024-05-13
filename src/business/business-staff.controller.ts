@@ -55,7 +55,7 @@ export class BusinessStaffController {
    * @returns {Promise<Staff[]>} The staff of the business.
    */
   @Get()
-  async findAll(
+  async findAllByBusiness(
     @Param('businessId', ParseIntPipe) businessId: number,
   ): Promise<Staff[]> {
     const business = await this.businessService.findOne(businessId);
@@ -63,9 +63,13 @@ export class BusinessStaffController {
       this.logger.debug(`Business with id ${businessId} not found`);
       throw new NotFoundException('Business not found');
     }
-    return await this.staffService.findAll(businessId);
+    return await this.staffService.findAllByBusiness(businessId);
   }
 
+  @Get('/staff')
+  async findAll(): Promise<Staff[]> {
+    return await this.staffService.findAll();
+  }
   /**
    * Handles the GET /business/:businessId/staff/:id request.
    * Returns a staff member by ID.

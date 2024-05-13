@@ -1,12 +1,4 @@
-import {
-  BadRequestException,
-  Body,
-  ClassSerializerInterceptor,
-  Controller,
-  Post,
-  SerializeOptions,
-  UseInterceptors,
-} from '@nestjs/common';
+import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './input/create-user.dto';
 import { User } from './user.entity';
@@ -19,7 +11,6 @@ import { UserService } from './user.service';
  * @class UsersController
  */
 @Controller('users')
-@SerializeOptions({ strategy: 'excludeAll' })
 export class UsersController {
   /**
    * Creates an instance of UsersController.
@@ -41,7 +32,6 @@ export class UsersController {
    * @throws {BadRequestException} If the passwords do not match or if the username or email is already taken.
    */
   @Post()
-  @UseInterceptors(ClassSerializerInterceptor)
   async create(@Body() input: CreateUserDto) {
     if (input.password !== input.password_confirmation) {
       throw new BadRequestException({ message: 'Passwords do not match' });
@@ -63,9 +53,14 @@ export class UsersController {
       password: await this.authService.hashPassword(input.password),
     });
 
+    const savedUser = await this.userService.createUser(user);
+    const token = this.authService.getUserToken(savedUser);
+
     return {
-      ...(await this.userService.createUser(user)),
-      token: this.authService.getUserToken(user),
+      userId: savedUser.id,
+      username: savedUser.username,
+      email: savedUser.email,
+      token,
     };
   }
 }

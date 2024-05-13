@@ -55,16 +55,16 @@ describe('BusinessStaffController', () => {
   });
   it('finds all staff for a business', async () => {
     jest.spyOn(businessService, 'findOne').mockResolvedValue(business);
-    jest.spyOn(staffService, 'findAll').mockResolvedValue([staff]);
+    jest.spyOn(staffService, 'findAllByBusiness').mockResolvedValue([staff]);
 
-    expect(await controller.findAll(businessId)).toEqual([staff]);
+    expect(await controller.findAllByBusiness(businessId)).toEqual([staff]);
   });
 
   it('throws an error when business not found', async () => {
     const businessId = 1;
     jest.spyOn(businessService, 'findOne').mockResolvedValue(undefined);
 
-    await expect(controller.findAll(businessId)).rejects.toThrow(
+    await expect(controller.findAllByBusiness(businessId)).rejects.toThrow(
       NotFoundException,
     );
   });

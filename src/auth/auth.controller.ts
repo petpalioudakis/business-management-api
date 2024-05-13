@@ -38,11 +38,16 @@ export class AuthController {
    */
   @Post('login')
   @UseGuards(AuthGuardLocal)
-  async login(
-    @CurrentUser() user: User,
-  ): Promise<{ userId: string | number; token: string }> {
+  async login(@CurrentUser() user: User): Promise<{
+    userId: string | number;
+    username: string;
+    email: string;
+    token: string;
+  }> {
     return {
       userId: user.id,
+      username: user.username,
+      email: user.email,
       token: this.authService.getUserToken(user),
     };
   }

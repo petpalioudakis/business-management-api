@@ -25,12 +25,23 @@ export class StaffService {
    * @param {number} business_id - The ID of the business.
    * @returns {Promise<Staff[]>} A promise that resolves to an array of Staff entities.
    */
-  async findAll(business_id: number): Promise<Staff[]> {
+  async findAllByBusiness(business_id: number): Promise<Staff[]> {
     return await this.staffRepository.find({
       relations: {
         business: true,
       },
       where: { business: { id: business_id } },
+    });
+  }
+
+  /**
+   * Find all staff members without a business.
+   */
+  async findAll(): Promise<Staff[]> {
+    return await this.staffRepository.find({
+      relations: {
+        business: true,
+      },
     });
   }
 
